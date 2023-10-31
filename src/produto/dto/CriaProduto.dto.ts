@@ -7,6 +7,7 @@ import {
   IsNumber,
   IsPositive,
   IsString,
+  IsUUID,
   MaxLength,
   Min,
   ValidateNested,
@@ -15,6 +16,9 @@ import { CaracteristicaProdutoDTO } from './CaracteristicaProduto.dto';
 import { ImagemProdutoDTO } from './ImagemProduto.dto';
 
 export class CriaProdutoDTO {
+  @IsUUID(undefined, { message: 'Id do usuário inválido' })
+  usuarioId: string;
+
   @IsString()
   @IsNotEmpty({ message: 'Nome do produto não pode ser vazio' })
   nome: string;
