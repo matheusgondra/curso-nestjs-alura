@@ -16,4 +16,20 @@ export class UsuarioRepository {
   async existeComEmail(email: string) {
     return this.usuarios.some((usuario) => usuario.email === email);
   }
+
+  async atualiza(id: string, novosDados: Partial<UsuarioEntity>) {
+    const possivelUsuario = this.usuarios.find((usuario) => usuario.id === id);
+    if (!possivelUsuario) {
+      throw new Error('Usuário não existe');
+    }
+
+    Object.entries(novosDados).forEach(([chave, valor]) => {
+      if (chave === 'id') {
+        return;
+      }
+
+      possivelUsuario[chave] = valor;
+    });
+    return possivelUsuario;
+  }
 }
